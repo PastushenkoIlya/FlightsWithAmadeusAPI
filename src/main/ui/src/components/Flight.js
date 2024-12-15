@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import FlightSelect from "./FlightSelect";
+
 function Flight(props) {
     const [passengers, setPassengers] = useState(1);
     const [departDate, setDepartDate] = useState('');
     const [returnDate, setReturnDate] = useState('');
     const [flightOptions, setFlightOptions] = useState([]);
+
     function submit(event, props){
         event.preventDefault();
-        var returnDateParam = (returnDate ? "&returnDate=" + returnDate : "");
+        let returnDateParam = (returnDate ? "&returnDate=" + returnDate : "");
         fetch(
-            "/api/flights/?origin=" + props.origin  +
+            "/api/flights?origin=" + props.origin  +
             "&destination=" + props.destination +
             "&departDate=" + departDate +
             "&adults=" + passengers +
@@ -46,5 +48,5 @@ function Flight(props) {
             <FlightSelect flightOptions={flightOptions} setFlight={props.setFlight} />
         </div>
     );
-};
+}
 export default Flight;
